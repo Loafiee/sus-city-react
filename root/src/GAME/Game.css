@@ -1,0 +1,310 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 2%;
+  margin: 0;
+  /* border-radius: 3.6540803897685747vh; */
+  /* background-image: url("../WALLPAPERS/main-background.jpeg");
+  background-size: 460px, 360px, auto; */
+  background-repeat: no-repeat;
+  background-color: #f3e3ca;
+}
+
+.top-menu-bar {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  background-color: #648c87;
+  margin-top: 4vh;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 9vh;
+  border-radius: 20px;
+  margin-left: 2vh;
+  margin-right: 2vh;
+}
+
+.circle {
+  background-color: #3a651f;
+  width: 6.090133982947624vh;
+  height: 6.090133982947624vh;
+  border-radius: 50%;
+  font-size: 3.045066991473812vh;
+  color: whitesmoke;
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center;
+  z-index: 1;
+}
+
+.rectangle {
+  width: 90%;
+  height: 4.8721071863581vh;
+  background-color: #3a651f;
+  position: relative;
+  left: calc(-8.526187576126675vh / 2);
+  /* /width of circle/2 -> radius of circle + margin of env-sus-bar/ */
+  border-radius: 10px;
+  z-index: 0;
+  display: flex;
+}
+
+.level-progress {
+  width: 40%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  background-color: whitesmoke;
+  float: right;
+  border-radius: inherit;
+}
+
+.env-sus-bar {
+  display: flex;
+  width: 40%;
+  height: inherit;
+  flex-direction: row;
+  float: left;
+  align-items: center;
+}
+
+.btn {
+  height: inherit;
+  float: left;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.fa-solid {
+  font-size: 6.090133982947624vh;
+  color: #000000;
+  background-color: transparent;
+  border-color: transparent;
+  cursor: pointer;
+}
+
+.username,
+.GPoint,
+.favour {
+  display: flex;
+  font-size: 20px;
+}
+
+.account {
+  float: left;
+}
+
+.main-menu {
+  flex: 2;
+  height: 650px;
+  padding-top: 10px;
+  border-radius: inherit;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+.city-layout {
+  background-color: #d9d9d9;
+  float: left;
+  /* /border-radius: inherit;/ */
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 4%;
+  height: 80vh;
+  width: 100vh;
+  image-rendering: pixelated;
+  position: relative;
+}
+
+.txt_field label {
+  position: absolute;
+  top: 11%;
+  left: 5px;
+  color: #adadad;
+  transform: translateY(-50%);
+  font-size: 16px;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+/* html {
+} */
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.body {
+  font-family: "Roboto", "Helvetica Neue", "Lucida Grande", sans-sherif;
+}
+
+.mainCont {
+  margin: 0;
+  background-color: black;
+  color: green;
+  display: flex;
+  flex-direction: column;
+  float: left;
+  height: 80vh;
+  width: 37.05902777777778vw;
+  border-radius: 15px;
+  align-self: flex-end;
+  margin-left: 61.6vw;
+}
+.mainCont h2 {
+  display: inline-block;
+  text-align: center;
+  margin: 2px;
+  /* margin-bottom: 0; */
+  opacity: 1;
+  animation: fadeAnimation 1s ease-in-out 0s forwards;
+  height: 10vh;
+  width: auto;
+  font-size: 5vw;
+  color: aquamarine;
+}
+.terminalCont {
+  height: 80%;
+  width: inherit;
+  padding: 3vh;
+  font-family: "Roboto" monospace;
+  opacity: 0;
+  animation: slideAnimation 1s ease-in-out 1s forwards,
+    fadeAnimation 0.8s ease-in-out 1s forwards;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow-y: auto;
+  border-radius: 15px;
+}
+#terminalResultsCont {
+  color: green;
+  font-size: 20px;
+  padding-bottom: 18px;
+  font-family: "Roboto Mono" monospace;
+  line-height: 20px;
+  width: inherit;
+}
+#terminalTextInput {
+  background: inherit;
+  display: block;
+  border-color: rgb(194, 194, 194);
+  width: 100%;
+  color: green;
+  font-size: 20px;
+  margin-left: 2vw;
+  outline: none;
+  font-family: "Roboto Mono" monospace;
+  align-self: center;
+}
+#inputCont {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.fa-paper-plane {
+  color: green;
+  font-size: 20px;
+  background-color: transparent;
+  cursor: pointer;
+  align-self: auto;
+  margin-right: 4vw;
+}
+.terminalResultWrapper {
+  overflow-y: auto;
+  /* height: 10%; */
+}
+.pass {
+  margin: -5px 0 20px 5px;
+  cursor: pointer;
+}
+.pass:hover {
+  text-decoration: underline;
+}
+
+#city-image {
+  width: auto;
+  height: inherit;
+  position: absolute;
+  z-index: 0;
+}
+.overlay-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: inherit;
+  z-index: 1;
+}
+
+/* the animation part from some tutorial*/
+@-webkit-keyframes fadeAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes fadeAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-o-keyframes fadeAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes slideAnimation {
+  0% {
+    opacity: -20px;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-moz-keyframes slideAnimation {
+  0% {
+    opacity: -20px;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-o-keyframes slideAnimation {
+  0% {
+    opacity: -20px;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes slideAnimation {
+  0% {
+    opacity: -20px;
+  }
+  100% {
+    opacity: 0;
+  }
+}

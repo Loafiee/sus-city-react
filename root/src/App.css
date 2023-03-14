@@ -1,0 +1,19 @@
+.hidden {
+  visibility: hidden;
+  z-index: 1;
+}
+.shown {
+  visibility: visible;
+  z-index: 2;
+}
+.body {
+  margin: 0;
+  padding: 0;
+}
+.page {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
