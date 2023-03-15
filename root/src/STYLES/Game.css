@@ -111,23 +111,20 @@ body {
 
 .city {
   height: 100%;
-  width: 50%;
+  width: 50vw;
   position: absolute;
+  image-rendering: pixelated;
 }
 
-.city-layout {
-  background-color: #d9d9d9;
-  float: left;
+/* float: left;
   /* /border-radius: inherit;/ */
-  display: flex;
+/* display: flex;
   flex-wrap: wrap;
-  margin-right: 4%;
-  /* height: 80vh; */
-  height: inherit;
-  width: 100vh;
-  image-rendering: pixelated;
-  position: relative;
-}
+  margin-right: 4%; */
+/* height: 80vh; */
+/* height: inherit;
+  width: 1000vh; */
+/* position: relative; */
 
 .txt_field label {
   position: absolute;
@@ -158,26 +155,27 @@ body {
   float: left;
   height: 80vh;
   /* width: 37.05902777777778vw; */
-  width: 50%;
+  width: 40%;
   border-radius: 15px;
   align-self: flex-end;
-  margin-left: 61.6vw;
+  margin-left: 58.5vw;
 }
 .mainCont h2 {
   display: inline-block;
   text-align: center;
   margin: 2px;
+  margin-top: 5px;
   /* margin-bottom: 0; */
   opacity: 1;
   animation: fadeAnimation 1s ease-in-out 0s forwards;
   height: 10vh;
   width: auto;
-  font-size: 5vw;
+  font-size: 4vw;
   color: aquamarine;
 }
 .terminalCont {
   height: 80%;
-  width: inherit;
+  width: 100%;
   padding: 3vh;
   font-family: "Roboto" monospace;
   opacity: 0;
@@ -203,8 +201,7 @@ body {
   border-color: rgb(194, 194, 194);
   width: 100%;
   color: green;
-  font-size: 20px;
-  margin-left: 2vw;
+  font-size: 30px;
   outline: none;
   font-family: "Roboto Mono" monospace;
   align-self: center;
@@ -216,11 +213,10 @@ body {
 }
 .fa-paper-plane {
   color: green;
-  font-size: 20px;
+  font-size: 30px;
   background-color: transparent;
   cursor: pointer;
   align-self: auto;
-  margin-right: 4vw;
 }
 .terminalResultWrapper {
   overflow-y: auto;
