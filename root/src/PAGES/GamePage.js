@@ -1,23 +1,23 @@
 import React from "react";
-import "./Game.css";
+import "../STYLES/Game.css";
 import { BsBoxArrowRight, BsShop, BsFillSendFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
-//IMAGES
-import city from "../BASE-DEVELOPMENTS/BASE-0.png";
+//Import Images
+import city from "../ASSETS/BASE-0.png";
 
-export default function Game() {
+export default function GamePage() {
   return (
     <div className="game-body">
       {/* top menu bar */}
       <div className="top-menu-bar">
         {/* back to login page */}
-        <button
-          className=" fa-solid fa-right-from-bracket btn"
-          id="return"
-          //   onClick={playSound()}
-        >
-          <BsBoxArrowRight></BsBoxArrowRight>
-        </button>
+        <Link to={"/signup"}>
+          <button className=" fa-solid fa-right-from-bracket btn" id="return">
+            <BsBoxArrowRight></BsBoxArrowRight>
+          </button>
+        </Link>
+
         {/* env sus bar */}
         <div className="env-sus-bar">
           <div className="circle"></div>
@@ -31,14 +31,12 @@ export default function Game() {
         >
           <BsShop></BsShop>
         </button>
-        {/* shop */}
+
         <div className="GPoint"></div>
-        {/* setting */}
         <div className="favour"></div>
         <div className="username">
           Hello <span></span>
         </div>
-        {/* username account */}
       </div>
       <div className="main-menu">
         <img id="city-image" src={city} alt=""></img>
@@ -58,15 +56,9 @@ export default function Game() {
                 placeholder="Try /help"
                 autoComplete="off"
               ></input>
-              <div>
-                <button
-                  className="fa-regular fa-paper-plane"
-                  id="sendBtn"
-                  //   onClick={playSound()}
-                >
-                  <BsFillSendFill></BsFillSendFill>
-                </button>
-              </div>
+              <button className="fa-regular fa-paper-plane" id="sendBtn">
+                <BsFillSendFill></BsFillSendFill>
+              </button>
             </div>
           </div>
         </div>

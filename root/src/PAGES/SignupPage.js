@@ -1,11 +1,8 @@
 import React from "react";
-import "./Signup.css";
+import "../STYLES/Signup.css";
+import { Link } from "react-router-dom";
 
-// export const playSound = ({ link }) => {
-//   new Audio(link).play();
-// };
-
-export default function Signup({ setIsButtonPressed }) {
+export default function SignupPage({ setIsButtonPressed }) {
   return (
     <div className="signup-body">
       <div className="center">
@@ -15,15 +12,10 @@ export default function Signup({ setIsButtonPressed }) {
           <span></span>
           <label>Type a fun username (changed on every login)</label>
         </div>
-        <button
-          id="submit_btn"
-          onClick={() => {
-            setIsButtonPressed();
-            // playSound("../SOUNDS/menuclick.mp3");
-          }}
-        >
-          Signup
-        </button>
+        <Link to={"/game"}>
+          <button id="submit_btn">Sign up</button>
+        </Link>
+
         <script type="module" src="/FIREBASE/signup-firebase.js"></script>
       </div>
     </div>

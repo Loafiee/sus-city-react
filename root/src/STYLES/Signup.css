@@ -9,9 +9,9 @@
   padding: 0;
   height: 100vh;
   overflow: hidden;
-  background-image: url("../WALLPAPERS/wallpaper.jpeg");
+  background-image: url("../ASSETS/WALLPAPERS/wallpaper.jpeg");
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("../WALLPAPERS/wallpaper.jpeg");
+    url("../ASSETS/WALLPAPERS/wallpaper.jpeg");
   background-size: 100% auto; /*resizes the image*/
 }
 .center {

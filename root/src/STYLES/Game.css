@@ -2,7 +2,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding: 2%;
+  /* padding: 2%; */
   margin: 0;
   /* border-radius: 3.6540803897685747vh; */
   /* background-image: url("../WALLPAPERS/main-background.jpeg");
