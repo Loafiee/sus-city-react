@@ -99,12 +99,20 @@ body {
 
 .main-menu {
   flex: 2;
-  height: 650px;
-  padding-top: 10px;
+  height: 700px;
+  /*650px*/
+  padding: 2vh;
+  /* padding-top: 10px; */
   border-radius: inherit;
-  display: flex;
+  /* display: flex; */
   flex-direction: row;
   overflow: hidden;
+}
+
+.city {
+  height: 100%;
+  width: 50%;
+  position: absolute;
 }
 
 .city-layout {
@@ -114,7 +122,8 @@ body {
   display: flex;
   flex-wrap: wrap;
   margin-right: 4%;
-  height: 80vh;
+  /* height: 80vh; */
+  height: inherit;
   width: 100vh;
   image-rendering: pixelated;
   position: relative;
@@ -140,10 +149,6 @@ body {
   box-sizing: inherit;
 }
 
-.body {
-  font-family: "Roboto", "Helvetica Neue", "Lucida Grande", sans-sherif;
-}
-
 .mainCont {
   margin: 0;
   background-color: black;
@@ -152,7 +157,8 @@ body {
   flex-direction: column;
   float: left;
   height: 80vh;
-  width: 37.05902777777778vw;
+  /* width: 37.05902777777778vw; */
+  width: 50%;
   border-radius: 15px;
   align-self: flex-end;
   margin-left: 61.6vw;
