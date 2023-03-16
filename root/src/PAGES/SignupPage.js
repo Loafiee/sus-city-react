@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
 import "../STYLES/Signup.css";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import * as firebase from "firebase/app";
 import axios from "axios";
-import "firebase/auth";
+import DB from "..";
 
 //FIREBASE IMPORTS
 import {
@@ -12,12 +12,13 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { getDatabase, set, ref, update } from "firebase/database";
-// import app from "../FIREBASE/Base";
 
 export default function SignupPage() {
-  const [app, setApp] = useState(null);
-  const [auth, setAuth] = useState(null);
-  const [database, setDatabase] = useState(null);
+  const { app, setApp, auth, setAuth, database, setDatabase } = useContext(DB);
+
+  // const [app, setApp] = useState(null);
+  // const [auth, setAuth] = useState(null);
+  // const [database, setDatabase] = useState(null);
 
   useEffect(() => {
     axios({
@@ -25,7 +26,6 @@ export default function SignupPage() {
       url: "http://localhost:8000/config",
     })
       .then(function (response) {
-        // console.log(response.data);
         const firebaseApp = firebase.initializeApp(response.data);
         setApp(firebaseApp);
       })
@@ -84,7 +84,7 @@ export default function SignupPage() {
             signInWithEmailAndPassword(auth, email, password)
               .then((userCredential) => {
                 const user = userCredential.user;
-
+                localStorage.setItem("UID", user.uid);
                 var lgDate = new Date();
                 update(ref(database, "users/" + user.uid), {
                   last_login: lgDate,
@@ -100,6 +100,18 @@ export default function SignupPage() {
                       set(ref(database, "users/" + user.uid), {
                         email: email,
                         password: password,
+                        level: 1,
+                        greenpoints: 0,
+                        favor: 0,
+                        levelProgress: 0,
+                        roadLevel: 2,
+                        factoryLevel: 2,
+                        parkLevel: 2,
+                        officesLevel: 2,
+                        landfillLevel: 2,
+                        coastLevel: 2,
+                        gasstationLevel: 2,
+                        shopItems: [""],
                       });
 
                       navigate("/game");

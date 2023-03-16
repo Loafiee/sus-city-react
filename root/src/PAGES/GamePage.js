@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "../STYLES/Game.css";
 import { BsFillSendFill } from "react-icons/bs";
 import MenuBar from "../COMPONENTS/MenuBar";
-// import ReactDOM from "react-dom";
-
+import DB from "..";
 // import useSound from "use-sound";
 
 //import sound
@@ -30,6 +29,8 @@ import parkStage2 from "../ASSETS/DEVELOPMENTS/PARK-stage 2.png";
 import parkStage3 from "../ASSETS/DEVELOPMENTS/PARK-stage 3.png";
 
 export default function GamePage() {
+  const { app, setApp, auth, setAuth, database, setDatabase } = useContext(DB);
+
   const [layers, setLayers] = useState([city]);
   // const BoopButton = () => {
   //   const [playMenuClick] = useSound(menuClick);
