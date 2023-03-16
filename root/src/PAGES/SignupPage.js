@@ -1,59 +1,98 @@
 import React, { useState } from "react";
 import "../STYLES/Signup.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-// import { database } from "../firebase";
+//FIREBASE IMPORTS
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getDatabase, set, ref } from "firebase/database";
+import app from "../FIREBASE/Base";
 
-import { ref, set } from "firebase/database";
-// import useSound from 'use-sound';
+export default function SignupPage() {
+  const auth = getAuth(app);
+  const database = getDatabase(app);
+  const navigate = useNavigate();
 
-// //import sound
-// import menuClick from '../ASSETS/SOUNDS/menuclick.mp3';
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-export default function SignupPage({ setIsButtonPressed }) {
-  // const BoopButton = () => {
-  //   const [playMenuClick] = useSound(menuClick);
-
-  const [userInfo, setUserInfo] = useState({
-    username: "",
-  });
-
-  // function writeUserData(userId, username, email) {
-  //   set(ref(database, "users/" + userId), {
-  //     username: username,
-  //     email: email,
-  //   });
-  // }
+  const changeEmail = (event) => {
+    setEmail(event.target.value);
+  };
+  const changePassword = (event) => {
+    setPassword(event.target.value);
+  };
 
   return (
     <div className="signup-body">
       <div className="center">
         <h1>Sign Up</h1>
         <div className="txt_field">
-          <input type="text" id="email" required />
-          {/* <input type="text" id="username" required /> */}
+          <input
+            type="email"
+            id="email"
+            onChange={changeEmail}
+            value={email}
+            required
+          />
           <span></span>
           <label>email</label>
         </div>
         <div className="txt_field">
-          <input type="text" id="password" required />
-          {/* <input type="text" id="username" required /> */}
+          <input
+            type="password"
+            id="password"
+            onChange={changePassword}
+            value={password}
+            required
+          />
           <span></span>
           <label>password</label>
         </div>
-        <Link to={"/game"}>
-          <button
-            id="submit_btn"
-            onClick={() => {
-              // writeUserData()
-            }}
-          >
-            Sign up
-          </button>
-        </Link>
+        <button
+          id="submit_btn"
+          onClick={() => {
+            createUserWithEmailAndPassword(auth, email, password)
+              .then((userCredential) => {
+                const user = userCredential.user;
+                // localStorage.setItem("USER_ID", user.uid);
 
-        <script type="module" src="/FIREBASE/signup-firebase.js"></script>
+                set(ref(database, "users/" + user.uid), {
+                  email: email,
+                  password: password,
+                });
+
+                navigate("/game");
+              })
+              .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                switch (errorCode) {
+                  case "auth/invalid-email":
+                    alert("Please enter a valid email.");
+                    break;
+                  case "auth/weak-password":
+                    alert(
+                      "Please enter a stronger password, with a minimum of 6 characters."
+                    );
+                    break;
+                  default:
+                    alert("Please enter a valid email and password.");
+                }
+                console.log(errorMessage);
+              });
+          }}
+        >
+          Sign up
+        </button>
       </div>
     </div>
   );
 }
+
+//SOUND STUFF
+// const BoopButton = () => {
+//   const [playMenuClick] = useSound(menuClick);
+// import useSound from 'use-sound';
+
+// //import sound
+// import menuClick from '../ASSETS/SOUNDS/menuclick.mp3';
