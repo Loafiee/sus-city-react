@@ -3,6 +3,7 @@ import "../STYLES/Game.css";
 import { BsFillSendFill } from "react-icons/bs";
 import MenuBar from "../COMPONENTS/MenuBar";
 import DB from "..";
+import { ref, get, update, increment, getDatabase } from "firebase/database";
 // import useSound from "use-sound";
 
 //import sound
@@ -30,6 +31,17 @@ import parkStage3 from "../ASSETS/DEVELOPMENTS/PARK-stage 3.png";
 
 export default function GamePage() {
   const { app, setApp, auth, setAuth, database, setDatabase } = useContext(DB);
+  const userUID = localStorage.getItem("UID");
+  // const userRef = ref(database, "users/" + userUID);
+  const [data, setData] = useState(null);
+
+  const getData = () => {};
+
+  const updateData = (prop) => {
+    const updates = {};
+    updates[`/${prop}`] = increment(1);
+    update(ref(database, "users/" + userUID), updates);
+  };
 
   const [layers, setLayers] = useState([city]);
   // const BoopButton = () => {
@@ -56,10 +68,34 @@ export default function GamePage() {
 
   useEffect(() => {
     constantSound();
-
-    //LOAD DEVELOPMENTS WHEN FIRST LAUNCH
-    //setLayers([...layers, blimp]); -> where blimp is newly added image
   }, []);
+
+  useEffect(() => {
+    if (database) {
+      get(ref(database, `users/${userUID}`))
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            setData(snapshot.val());
+          } else {
+            console.log("User does not exist"); //Redirect user to sign up page
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [database]);
+
+  useEffect(() => {
+    // Load Developments
+    if (data) {
+      updateData("roadLevel");
+      if (data.roadLevel >= 3) {
+        setLayers(...layers, devRoad1); //sets the new value of layers as the old value + newly added
+        console.log(city);
+      }
+    }
+  }, [data]);
 
   return (
     <div className="game-body">
