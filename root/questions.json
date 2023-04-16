@@ -1,0 +1,46 @@
+[
+    {
+        "question": "How do EVs reduce noise pollution?",
+        "choices": [
+            {
+                "text": "EVs lack internal combustion engines",
+                "id": 1
+            },
+            {
+                "text": "EVs travel at slower speeds",
+                "id": 2
+            },
+            {
+                "text": "EVs have sound dampeners",
+                "id": 3
+            },
+            {
+                "text": "EVs do not.",
+                "id": 4
+            }
+        ],
+        "correctAnswer": 1
+    },
+    {
+        "question": "How do EVs reduce noise pollution?",
+        "choices": [
+            {
+                "text": "EVs lack internal combustion engines",
+                "id": 1
+            },
+            {
+                "text": "EVs travel at slower speeds",
+                "id": 2
+            },
+            {
+                "text": "EVs have sound dampeners",
+                "id": 3
+            },
+            {
+                "text": "EVs do not.",
+                "id": 4
+            }
+        ],
+        "correctAnswer": 1
+    }
+]
