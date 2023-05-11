@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import "../STYLES/Game.css";
 import { BsFillSendFill } from "react-icons/bs";
-import MenuBar from "../COMPONENTS/MenuBar";
-import DB from "..";
-import { ref, get, update, increment, getDatabase } from "firebase/database";
+import MenuBar from "./MenuBar";
+import { ref, get, update, increment } from "firebase/database";
+import { getAllQuestions } from "../HELPER-FUNC/ReadQns";
+import { FirebaseContext } from "../HELPER-FUNC/FirebaseProvider";
 // import useSound from "use-sound";
 
 //import sound
@@ -30,12 +31,52 @@ import parkStage2 from "../ASSETS/DEVELOPMENTS/PARK-stage 2.png";
 import parkStage3 from "../ASSETS/DEVELOPMENTS/PARK-stage 3.png";
 
 export default function GamePage() {
-  const { app, setApp, auth, setAuth, database, setDatabase } = useContext(DB);
-  const userUID = localStorage.getItem("UID");
-  // const userRef = ref(database, "users/" + userUID);
-  const [data, setData] = useState(null);
+  const [app, auth, database] = useContext(FirebaseContext);
 
-  const getData = () => {};
+  const userUID = localStorage.getItem("UID");
+  // const userRef = ref(firebaseApp.database, "users/" + userUID);
+  const [data, setData] = useState(null); //set user data
+
+  //for questions
+  const [questions, setQuestions] = useState([]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        console.log("PROGRESS: Start Loading");
+        const loadedQuestions = await getAllQuestions(database);
+        console.log("PROGRESS: Finished Loading");
+        setQuestions(loadedQuestions);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (database) {
+      fetchQuestions();
+      get(ref(database, `users/${userUID}`))
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            setData(snapshot.val());
+          } else {
+            console.log("User does not exist"); //Redirect user to sign up page
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      console.log("ERROR: Database undefined");
+    }
+  }, [database]);
+
+  useEffect(() => {
+    console.log(questions);
+    //START GAME AFTER HERE
+  }, [questions]);
+
+  // const currentQuestion = questions[currentQuestionIndex];
 
   const updateData = (prop) => {
     const updates = {};
@@ -71,27 +112,11 @@ export default function GamePage() {
   }, []);
 
   useEffect(() => {
-    if (database) {
-      get(ref(database, `users/${userUID}`))
-        .then((snapshot) => {
-          if (snapshot.exists()) {
-            setData(snapshot.val());
-          } else {
-            console.log("User does not exist"); //Redirect user to sign up page
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  }, [database]);
-
-  useEffect(() => {
     // Load Developments
     if (data) {
       updateData("roadLevel");
       if (data.roadLevel >= 3) {
-        setLayers(...layers, devRoad1); //sets the new value of layers as the old value + newly added
+        setLayers([...layers, devRoad1]); //sets the new value of layers as the old value + newly added
         console.log(city);
       }
     }

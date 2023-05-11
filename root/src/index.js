@@ -1,12 +1,9 @@
-import React, { createContext, useState } from "react";
-import "../src/STYLES/index.css";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import GamePage from "./PAGES/GamePage";
 import SignupPage from "./PAGES/SignupPage";
-
-const DB = createContext();
-export default DB;
+import { FirebaseProvider } from "./HELPER-FUNC/FirebaseProvider";
 
 const router = createBrowserRouter([
   {
@@ -24,14 +21,10 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-  const [app, setApp] = useState(null);
-  const [auth, setAuth] = useState(null);
-  const [database, setDatabase] = useState(null);
-
   return (
-    <DB.Provider value={{ app, setApp, auth, setAuth, database, setDatabase }}>
+    <FirebaseProvider>
       <RouterProvider router={router} />
-    </DB.Provider>
+    </FirebaseProvider>
   );
 };
 

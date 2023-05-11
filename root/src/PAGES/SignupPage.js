@@ -1,45 +1,18 @@
 import "../STYLES/Signup.css";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import * as firebase from "firebase/app";
-import axios from "axios";
-import DB from "..";
+import { FirebaseContext } from "../HELPER-FUNC/FirebaseProvider";
 
 //FIREBASE IMPORTS
 import {
-  getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { getDatabase, set, ref, update } from "firebase/database";
+import { set, ref, update } from "firebase/database";
 
 export default function SignupPage() {
-  const { app, setApp, auth, setAuth, database, setDatabase } = useContext(DB);
+  const [app, auth, database] = useContext(FirebaseContext);
 
-  // const [app, setApp] = useState(null);
-  // const [auth, setAuth] = useState(null);
-  // const [database, setDatabase] = useState(null);
-
-  useEffect(() => {
-    axios({
-      method: "get",
-      url: "http://localhost:8000/config",
-    })
-      .then(function (response) {
-        const firebaseApp = firebase.initializeApp(response.data);
-        setApp(firebaseApp);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
-  useEffect(() => {
-    if (app) {
-      setAuth(getAuth(app));
-      setDatabase(getDatabase(app));
-    }
-  }, [app]);
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -51,6 +24,30 @@ export default function SignupPage() {
   const changePassword = (event) => {
     setPassword(event.target.value);
   };
+
+  function validateEmail(email) {
+    const re = /\S+\S+\.\S+/;
+    return re.test(email);
+  }
+
+  function validatePassword(password) {
+    const hasNumeric = /\d/.test(password);
+    const hasAlphabetical = /[a-zA-Z]/.test(password);
+    const hasSpecial = /[^a-zA-Z0-9]/.test(password);
+    if (!hasNumeric) {
+      return "Please include at least one numeric character in your password.";
+    }
+    if (!hasAlphabetical) {
+      return "Please include at least one alphabetical character in your password.";
+    }
+    if (!hasSpecial) {
+      return "Please include at least one special character in your password.";
+    }
+    if (!(password.length >= 6)) {
+      return "Please have at least 6 characters in your password";
+    }
+    return "";
+  }
 
   return (
     <div className="signup-body">
@@ -81,6 +78,16 @@ export default function SignupPage() {
         <button
           id="submit_btn"
           onClick={() => {
+            if (!validateEmail(email)) {
+              alert("Please enter a valid email.");
+              return;
+            }
+            const passwordValidationMessage = validatePassword(password);
+            if (passwordValidationMessage) {
+              alert(passwordValidationMessage);
+              return;
+            }
+
             signInWithEmailAndPassword(auth, email, password)
               .then((userCredential) => {
                 const user = userCredential.user;
